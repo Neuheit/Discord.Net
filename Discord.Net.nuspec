@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>cessum-core</id>
+    <version>$version$</version>
+    <title>Cessum Core</title>
+    <authors>Neuheit</authors>
+    <owners>Neuheit</owners>
+    <description>Base for Cessum Development Hub related projects.</description>
+    <releaseNotes></releaseNotes>
+  </metadata>
+  <files>
+	<file src="Discord.Net\bin\$configuration$\Discord.Net.dll" target="lib\net40\" />
+  </files>
+</package>
