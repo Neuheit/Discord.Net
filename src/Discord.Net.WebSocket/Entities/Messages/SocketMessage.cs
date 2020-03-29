@@ -197,9 +197,10 @@ namespace Discord.WebSocket
                 _reactions.Remove(reaction);
         }
         internal void ClearReactions()
-        {
-            _reactions.Clear();
-        }
+            => _reactions.Clear();
+
+        internal void ClearReactionsEmoji(SocketReaction reaction)
+            => _reactions.RemoveAll(r => r.Emote.Equals(reaction));
 
         /// <inheritdoc />
         public Task AddReactionAsync(IEmote emote, RequestOptions options = null)
@@ -213,6 +214,9 @@ namespace Discord.WebSocket
         /// <inheritdoc />
         public Task RemoveAllReactionsAsync(RequestOptions options = null)
             => MessageHelper.RemoveAllReactionsAsync(this, Discord, options);
+        /// <inheritdoc />
+        public Task RemoveEmojiReactionsAsync(IEmote emote, RequestOptions options = null)
+            => MessageHelper.RemoveEmojiReactionsAsync(this, emote, Discord, options);
         /// <inheritdoc />
         public IAsyncEnumerable<IReadOnlyCollection<IUser>> GetReactionUsersAsync(IEmote emote, int limit, RequestOptions options = null)
             => MessageHelper.GetReactionUsersAsync(this, emote, limit, Discord, options);
