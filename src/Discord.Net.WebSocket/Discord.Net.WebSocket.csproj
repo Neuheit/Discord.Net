@@ -8,7 +8,7 @@
     <TargetFrameworks Condition=" '$(OS)' != 'Windows_NT' ">netstandard2.0;netstandard2.1</TargetFrameworks>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <PackageId>CessumCore.WebSocket</PackageId>
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
     <Authors>Neuheit</Authors>
     <Company>Cessum Development Hub</Company>
     <Product>CessumCore.WebSocket</Product>

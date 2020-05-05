@@ -13,7 +13,7 @@
     <PackageProjectUrl>https://github.com/Neuheit/Discord.Net/tree/cessum-core</PackageProjectUrl>
     <RepositoryUrl>git://github.com/Neuheit/Discord.Net</RepositoryUrl>
     <PackageTags />
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
   <ItemGroup>
