@@ -15,6 +15,7 @@
     <PackageProjectUrl>https://github.com/Neuheit/Discord.Net</PackageProjectUrl>
     <RepositoryUrl>git://github.com/Neuheit/Discord.Net</RepositoryUrl>
     <PackageTags />
+    <PackageIcon>PackageLogo.jpg</PackageIcon>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
@@ -23,5 +24,11 @@
     <PackageReference Include="IDisposableAnalyzers" Version="2.1.2">
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\..\..\..\Downloads\PackageLogo.jpg">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 </Project>

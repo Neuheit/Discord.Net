@@ -16,9 +16,16 @@
     <RepositoryUrl>git://github.com/Neuheit/Discord.Net</RepositoryUrl>
     <PackageTags />
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageIcon>PackageLogo.jpg</PackageIcon>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\Discord.Net.Core\Discord.Net.Core.csproj" />
     <ProjectReference Include="..\Discord.Net.Rest\Discord.Net.Rest.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\..\..\..\Downloads\PackageLogo.jpg">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 </Project>
