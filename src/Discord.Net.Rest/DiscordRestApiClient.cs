@@ -964,6 +964,25 @@ namespace Discord.API
             return await SendJsonAsync<GuildWidget>("PATCH", () => $"guilds/{guildId}/widget", args, ids, options: options).ConfigureAwait(false);
         }
 
+        public async Task<MembershipScreen> GetGuildMembershipScreeningForm(ulong guildId, RequestOptions options = null)
+        {
+            Preconditions.NotEqual(guildId, 0, nameof(guildId));
+            options = RequestOptions.CreateOrClone(options);
+
+            var ids = new BucketIds(guildId: guildId);
+            return await SendAsync<MembershipScreen>("GET", () => $"guilds/{guildId}/member-verification", ids, options: options).ConfigureAwait(false);
+        }
+
+        public async Task<MembershipScreen> ModifyGuildMembershipScreeningForm(ulong guildId, ModifyGuildMembershipScreenParams args, RequestOptions options = null)
+        {
+            Preconditions.NotNull(args, nameof(args));
+            Preconditions.NotEqual(guildId, 0, nameof(guildId));
+            options = RequestOptions.CreateOrClone(options);
+
+            var ids = new BucketIds(guildId: guildId);
+            return await SendJsonAsync<MembershipScreen>("PATCH", () => $"guilds/{guildId}/member-verification", args, ids, options: options).ConfigureAwait(false);
+        }
+
         //Guild Integrations
         /// <exception cref="ArgumentException"><paramref name="guildId"/> must not be equal to zero.</exception>
         public async Task<IReadOnlyCollection<Integration>> GetGuildIntegrationsAsync(ulong guildId, RequestOptions options = null)

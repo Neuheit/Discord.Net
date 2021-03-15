@@ -382,6 +382,8 @@ namespace Discord
         ///     A task that represents the asynchronous modification operation.
         /// </returns>
         Task ModifyWidgetAsync(Action<GuildWidgetProperties> func, RequestOptions options = null);
+
+        Task<IMembershipScreen> ModifyMembershipScreenAsync(Action<MembershipScreenProperties> func, RequestOptions options = null);
         /// <summary>
         ///     Bulk-modifies the order of channels in this guild.
         /// </summary>
@@ -621,6 +623,8 @@ namespace Discord
         ///     A task that represents the asynchronous get operation. The task result contains the text channel
         ///     where Community guilds can display rules and/or guidelines; <see langword="null" /> if none is set.
         /// </returns>
+
+        Task<IMembershipScreen> GetMembershipScreenAsync(RequestOptions options = null);
         Task<ITextChannel> GetRulesChannelAsync(CacheMode mode = CacheMode.AllowDownload, RequestOptions options = null);
         /// <summary>
         ///     Gets the text channel channel where admins and moderators of Community guilds receive notices from Discord.

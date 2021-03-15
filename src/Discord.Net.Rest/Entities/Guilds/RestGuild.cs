@@ -258,6 +258,9 @@ namespace Discord.Rest
             Update(model);
         }
 
+        public Task<RestMembershipScreen> ModifyMembershipScreenAsync(Action<MembershipScreenProperties> func, RequestOptions options = null)
+            => GuildHelper.ModifyGuildMembershipScreenAsync(this, Discord, func, options);
+
         /// <inheritdoc />
         /// <exception cref="ArgumentNullException"><paramref name="args" /> is <see langword="null"/>.</exception>
         public async Task ReorderChannelsAsync(IEnumerable<ReorderChannelProperties> args, RequestOptions options = null)
@@ -495,6 +498,9 @@ namespace Discord.Rest
                 return await GuildHelper.GetChannelAsync(this, Discord, widgetChannelId.Value, options).ConfigureAwait(false);
             return null;
         }
+
+        public Task<RestMembershipScreen> GetMembershipScreenAsync(RequestOptions options = null)
+            => GuildHelper.GetMembershipScreenAsync(this, Discord, options);
 
         /// <summary>
         ///     Gets the text channel where guild notices such as welcome messages and boost events are posted.
@@ -1076,5 +1082,9 @@ namespace Discord.Rest
         /// <inheritdoc />
         async Task<IReadOnlyCollection<IWebhook>> IGuild.GetWebhooksAsync(RequestOptions options)
             => await GetWebhooksAsync(options).ConfigureAwait(false);
+        async Task<IMembershipScreen> IGuild.ModifyMembershipScreenAsync(Action<MembershipScreenProperties> func, RequestOptions options)
+            => await ModifyMembershipScreenAsync(func, options).ConfigureAwait(false);
+        async Task<IMembershipScreen> IGuild.GetMembershipScreenAsync(RequestOptions options)
+            => await GetMembershipScreenAsync(options).ConfigureAwait(false);
     }
 }

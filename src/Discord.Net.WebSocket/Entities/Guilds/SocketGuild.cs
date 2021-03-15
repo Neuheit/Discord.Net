@@ -555,6 +555,10 @@ namespace Discord.WebSocket
         /// <exception cref="ArgumentNullException"><paramref name="func"/> is <see langword="null"/>.</exception>
         public Task ModifyWidgetAsync(Action<GuildWidgetProperties> func, RequestOptions options = null)
             => GuildHelper.ModifyWidgetAsync(this, Discord, func, options);
+
+        public Task<RestMembershipScreen> ModifyMembershipScreenAsync(Action<MembershipScreenProperties> func, RequestOptions options = null)
+            => GuildHelper.ModifyGuildMembershipScreenAsync(this, Discord, func, options);
+
         /// <inheritdoc />
         public Task ReorderChannelsAsync(IEnumerable<ReorderChannelProperties> args, RequestOptions options = null)
             => GuildHelper.ReorderChannelsAsync(this, Discord, args, options);
@@ -1006,6 +1010,9 @@ namespace Discord.WebSocket
         public Task<IReadOnlyCollection<RestWebhook>> GetWebhooksAsync(RequestOptions options = null)
             => GuildHelper.GetWebhooksAsync(this, Discord, options);
 
+        public Task<RestMembershipScreen> GetMembershipScreenAsync(RequestOptions options = null)
+            => GuildHelper.GetMembershipScreenAsync(this, Discord, options);
+
         //Emotes
         /// <inheritdoc />
         public Task<GuildEmote> GetEmoteAsync(ulong id, RequestOptions options = null)
@@ -1387,11 +1394,19 @@ namespace Discord.WebSocket
         async Task<IReadOnlyCollection<IWebhook>> IGuild.GetWebhooksAsync(RequestOptions options)
             => await GetWebhooksAsync(options).ConfigureAwait(false);
 
+        async Task<IMembershipScreen> IGuild.GetMembershipScreenAsync(RequestOptions options)
+            => await GetMembershipScreenAsync(options).ConfigureAwait(false);
+
+        async Task<IMembershipScreen> IGuild.ModifyMembershipScreenAsync(Action<MembershipScreenProperties> func, RequestOptions options)
+            => await ModifyMembershipScreenAsync(func, options).ConfigureAwait(false);
+
+
         void IDisposable.Dispose()
         {
             DisconnectAudioAsync().GetAwaiter().GetResult();
             _audioLock?.Dispose();
             _audioClient?.Dispose();
         }
+
     }
 }
