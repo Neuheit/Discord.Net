@@ -8,6 +8,7 @@ using EmbedModel = Discord.API.GuildEmbed;
 using WidgetModel = Discord.API.GuildWidget;
 using Model = Discord.API.Guild;
 using RoleModel = Discord.API.Role;
+using MembershipScreenModel = Discord.API.MembershipScreen;
 using ImageModel = Discord.API.Image;
 
 namespace Discord.Rest
@@ -121,6 +122,25 @@ namespace Discord.Rest
 
             return await client.ApiClient.ModifyGuildWidgetAsync(guild.Id, apiArgs, options).ConfigureAwait(false);
         }
+
+        public static async Task<RestMembershipScreen> ModifyGuildMembershipScreenAsync(IGuild guild, BaseDiscordClient client,
+            Action<MembershipScreenProperties> func, RequestOptions options)
+        {
+            if (func == null)
+                throw new ArgumentNullException(nameof(func));
+
+            var args = new MembershipScreenProperties();
+            func(args);
+            var apiArgs = new API.Rest.ModifyGuildMembershipScreenParams
+            {
+                Enabled = args.Enabled,
+                Description = args.Description,
+            };
+
+            var model = await client.ApiClient.ModifyGuildMembershipScreeningForm(guild.Id, apiArgs, options).ConfigureAwait(false);
+            return model == null ? null : RestMembershipScreen.Create(model);
+        }
+
         public static async Task ReorderChannelsAsync(IGuild guild, BaseDiscordClient client,
             IEnumerable<ReorderChannelProperties> args, RequestOptions options)
         {
@@ -536,5 +556,14 @@ namespace Discord.Rest
         }
         public static Task DeleteEmoteAsync(IGuild guild, BaseDiscordClient client, ulong id, RequestOptions options)
             => client.ApiClient.DeleteGuildEmoteAsync(guild.Id, id, options);
+
+        public static async Task<RestMembershipScreen> GetMembershipScreenAsync(IGuild guild, BaseDiscordClient client,
+            RequestOptions options)
+        {
+            var model = await client.ApiClient.GetGuildMembershipScreeningForm(guild.Id, options).ConfigureAwait(false);
+            if (model != null)
+                return RestMembershipScreen.Create(model);
+            return null;
+        }
     }
 }

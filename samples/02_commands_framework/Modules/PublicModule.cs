@@ -3,6 +3,8 @@ using System.Threading.Tasks;
 using Discord;
 using Discord.Commands;
 using _02_commands_framework.Services;
+using Discord.Rest;
+using System.Collections.Generic;
 
 namespace _02_commands_framework.Modules
 {
@@ -25,6 +27,17 @@ namespace _02_commands_framework.Modules
             // Streams must be seeked to their beginning before being uploaded!
             stream.Seek(0, SeekOrigin.Begin);
             await Context.Channel.SendFileAsync(stream, "cat.png");
+        }
+
+        [Command("test")]
+        public async Task Test()
+        {
+            var newForms = new List<IMembershipScreenField>();
+
+            for (int i = 0; i < 5; i++)
+                newForms.Add(new RestMembershipScreenField("TERMS", $"ok{i}", new string[] { "yes", "yea", "hola" }, false));
+
+            var screen = await Context.Guild.ModifyMembershipScreenAsync(x => x.FormFields = Optional.Create(newForms as IEnumerable<IMembershipScreenField>));
         }
 
         // Get info on a user, or the user who invoked the command if one is not specified

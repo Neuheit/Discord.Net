@@ -85,6 +85,16 @@ namespace Discord.Rest
                 return RestGuildWidget.Create(model);
             return null;
         }
+
+        public static async Task<RestMembershipScreen> GetMembershipScreenAsync(BaseDiscordClient client,
+            ulong id, RequestOptions options)
+        {
+            var model = await client.ApiClient.GetGuildMembershipScreeningForm(id, options).ConfigureAwait(false);
+            if (model != null)
+                return RestMembershipScreen.Create(model);
+            return null;
+        }
+
         public static IAsyncEnumerable<IReadOnlyCollection<RestUserGuild>> GetGuildSummariesAsync(BaseDiscordClient client, 
             ulong? fromGuildId, int? limit, RequestOptions options)
         {
